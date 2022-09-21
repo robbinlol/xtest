@@ -2,9 +2,9 @@ package util
 
 import (
 	"encoding/xml"
-	"io/ioutil"
-	"log"
-	"os/exec"
+	// "io/ioutil"
+	// "log"
+	// "os/exec"
 )
 
 type NvidiaSmiLog struct {
