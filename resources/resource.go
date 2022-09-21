@@ -156,12 +156,12 @@ func (rs *Resources) Stop() {
 // Dump 持久化日志
 func (rs *Resources) Dump() error {
 	f, err := os.OpenFile(outputResourceFile, os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0666)
-	_, err = f.WriteString("CPU(%),MEMORY(%),GPU(MB),TIME\n")
+	_, err = f.WriteString("CPU(%),MEMORY(%),TIME\n")
 	if err != nil {
 		return err
 	}
 	for _, r := range rs.resources {
-		_, err = f.WriteString(fmt.Sprintf("%f,%f,%s,%s\n", r.Cpu, r.Mem, r.Gpu, time.UnixMicro(int64(r.Time)).Format("2006-01-02 15:04:05.000")))
+		_, err = f.WriteString(fmt.Sprintf("%f,%f,%s\n", r.Cpu, r.Mem, time.UnixMicro(int64(r.Time)).Format("2006-01-02 15:04:05.000")))
 		if err != nil {
 			return err
 		}
