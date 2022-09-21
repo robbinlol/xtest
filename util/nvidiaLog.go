@@ -359,30 +359,30 @@ type GpuS struct {
 	AccountedProcesses        AccountedProcessesS        `xml:"accounted_processes"`
 }
 
-// GpuProcesses 获得Nvidia的进程信息
-func GpuProcesses() ([]ProcessInfoS, error) {
-	c := exec.Command("nvidia-smi", "-x", "-q")
-	stdout, err := c.StdoutPipe()
-	if err != nil {
-		log.Fatal(err)
-		return []ProcessInfoS{}, err
-	}
-	defer stdout.Close()
-	if err := c.Start(); err != nil {
-		log.Fatal(err)
-		return []ProcessInfoS{}, err
-	}
-	opBytes, err := ioutil.ReadAll(stdout)
-	if err != nil {
-		log.Fatal(err)
-		return []ProcessInfoS{}, err
-	}
+// // GpuProcesses 获得Nvidia的进程信息
+// func GpuProcesses() ([]ProcessInfoS, error) {
+// 	c := exec.Command("nvidia-smi", "-x", "-q")
+// 	stdout, err := c.StdoutPipe()
+// 	if err != nil {
+// 		log.Fatal(err)
+// 		return []ProcessInfoS{}, err
+// 	}
+// 	defer stdout.Close()
+// 	if err := c.Start(); err != nil {
+// 		log.Fatal(err)
+// 		return []ProcessInfoS{}, err
+// 	}
+// 	opBytes, err := ioutil.ReadAll(stdout)
+// 	if err != nil {
+// 		log.Fatal(err)
+// 		return []ProcessInfoS{}, err
+// 	}
 
-	x := NvidiaSmiLog{}
-	err = xml.Unmarshal(opBytes, &x)
-	var processes []ProcessInfoS
-	for _, g := range x.Gpus {
-		processes = append(processes, g.Processes.ProcessInfos...)
-	}
-	return processes, nil
-}
+// 	x := NvidiaSmiLog{}
+// 	err = xml.Unmarshal(opBytes, &x)
+// 	var processes []ProcessInfoS
+// 	for _, g := range x.Gpus {
+// 		processes = append(processes, g.Processes.ProcessInfos...)
+// 	}
+// 	return processes, nil
+// }
